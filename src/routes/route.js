@@ -1,9 +1,13 @@
 const express = require('express');
-
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    res.send('My first ever api!')
-});
+const authorController= require("../controllers/authorController")
+const BookController= require("../controllers/bookController")
+
+router.post('/authors',  authorController.createAuthor  );
+router.post('/books',  BookController.createBook  );
+router.get('/books',  BookController.getBooks  );
+
+
 
 module.exports = router;
