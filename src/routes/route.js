@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const authorController= require("../controllers/authorController")
-const BookController= require("../controllers/bookController")
-const publishController= require("../controllers/publishController")
 
+const UserController= require("../controllers/userController")
+//const userModel= require("../models/userModel.js")
+const ProductController= require("../controllers/productController")
+const OrderController= require("../controllers/orderController")
 
-router.post('/authors',  authorController.createAuthor  );
-router.post('/books',  BookController.createBook  );
-router.get('/books',  BookController.getBooks  );
-router.post('/publishers',publishController.createPublisher);
-
+const middlewareGlobal=require('../middlewares/globalMiddleware.js')
+const captureInfo1=middlewareGlobal.captureInfoUO
+const captureInfo2=middlewareGlobal.captureInfoO
+router.post('/createProduct',  ProductController.createProduct);
+router.post('/createUser',captureInfo1,  UserController.createUser);
+router.post('/createOrder', captureInfo2, OrderController.createOrder);
+//router.get('/getauthors',  authorController.getAuthor);
 
 module.exports = router;
