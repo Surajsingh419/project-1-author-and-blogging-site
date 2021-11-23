@@ -1,23 +1,12 @@
 const mongoose=require('mongoose');
 const moment=require('moment');
-// const isoDate=require('isodate')
-// const today=new Date().toISOString();
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const orderSchema=new mongoose.Schema(
     {
-        userId: 
-              {
-                  type:ObjectId,
-                  ref:"User_22.11.2021"
-              },
-        productId:
-                {
-                    type:ObjectId,
-                    ref:"Product_22.11.2021"
-                },
+        userId: ObjectId,
+        productId:ObjectId,
         amount:Number,
         isFreeAppUser:Boolean,
-                
         date:
             {
                 type:Date,

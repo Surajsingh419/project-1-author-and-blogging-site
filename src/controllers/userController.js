@@ -2,16 +2,10 @@ const userModel= require("../models/userModel.js")
 
 const createUser= async function (req, res) 
 {
-    var data= req.body
-    let savedData= await userModel.create(data)
-      res.send({msg: savedData})    
+  let userDetails = req.body
+  userDetails.freeAppUser = req.isFreeAppUser//this attribute was set in req in the appMiddleware
+  let userCreated = await userModel.create(userDetails)
+  res.send({data: userCreated})
 }
 
-/*const getUser = async function (req, res) 
-{
-  let allBooks = await authorModel.find();
-  res.send({ msg: allBooks });
-}*/
-
 module.exports.createUser= createUser
-//module.exports.getAuthor= getAuthor

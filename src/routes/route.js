@@ -7,11 +7,11 @@ const ProductController= require("../controllers/productController")
 const OrderController= require("../controllers/orderController")
 
 const middlewareGlobal=require('../middlewares/globalMiddleware.js')
-const captureInfo1=middlewareGlobal.captureInfoUO
-const captureInfo2=middlewareGlobal.captureInfoO
+const captureInfo=middlewareGlobal.validateAppType
+
 router.post('/createProduct',  ProductController.createProduct);
-router.post('/createUser',captureInfo1,  UserController.createUser);
-router.post('/createOrder', captureInfo2, OrderController.createOrder);
+router.post('/createUser',captureInfo,  UserController.createUser);
+router.post('/createOrder',captureInfo, OrderController.createOrder);
 //router.get('/getauthors',  authorController.getAuthor);
 
 module.exports = router;
