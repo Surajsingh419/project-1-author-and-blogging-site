@@ -26,7 +26,6 @@ const authorSchema=new mongoose.Schema(
             {
                   type:String, 
                   require:true,
-                  //valid:true,
                   unique:true   
             },
     "password":
@@ -38,7 +37,7 @@ const authorSchema=new mongoose.Schema(
         
     },
 
-{timestamps: false} 
+{timestamps: true} 
 
 )
 
