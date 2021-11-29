@@ -33,27 +33,19 @@ const blogSchema=new mongoose.Schema(
     "tags:":[String] ,
     "category": 
             {
-                type:[String],
+                type:String,
                 require:true   
             },
     "subcategory":[String] ,
-    "timestamps": 
-                { 
-                    createdAt: 'created_at' ,
-                    updatedAt:'updated_at',
-                    deletedAt:'deleted_at'
-                },
+    "deletedAt":Date,
     "isDeleted":
             {
                 type:Boolean,
                 default:false
 
             },
-    "publishedAt":
-            {
-                timestamps: true
 
-            },
+    "publishedAt":Date,
     "isPublished":
             {
                 type:Boolean,
@@ -65,7 +57,8 @@ const blogSchema=new mongoose.Schema(
             
     },
 
-{} 
+{timestamps: true} 
+ 
 
 )
 
