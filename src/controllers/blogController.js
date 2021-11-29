@@ -11,6 +11,7 @@ const createBlog = async function (req, res) {
     const validId = await authorModel.findById(Id)
 
     const blogData = req.body;
+    
      
     if (validId){
         const newBlog = await blogModel.create(blogData)
