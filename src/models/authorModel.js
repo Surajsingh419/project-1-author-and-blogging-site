@@ -18,7 +18,7 @@ const authorSchema=new mongoose.Schema(
     "title": 
             {
               type:String, 
-              enum: [Mr, Mrs, Miss],
+              enum: ["Mr", "Mrs", "Miss"],
               require:true   
             },
 
@@ -26,7 +26,7 @@ const authorSchema=new mongoose.Schema(
             {
                   type:String, 
                   require:true,
-                  //valid:true,
+      
                   unique:true   
             },
     "password":
@@ -38,7 +38,7 @@ const authorSchema=new mongoose.Schema(
         
     },
 
-{timestamps: false} 
+{timestamps: true} 
 
 )
 
