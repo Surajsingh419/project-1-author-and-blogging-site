@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 
-const coinController= require("../controllers/coincapController")
+const authorController= require("../controllers/authorController")
 
 
-router.get('/getCryptoCoin',  coinController.getCoin);
+router.post('/authors', authorController.createAuthor);
 
 module.exports = router;
