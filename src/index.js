@@ -14,7 +14,7 @@ const mongoose = require('mongoose')
 
 
 
-mongoose.connect("mongodb+srv://monty-python:SnYUEY4giV9rekw@functionup-backend-coho.0zpfv.mongodb.net/SubhadipaBanerjee_db?retryWrites=true&w=majority", {useNewUrlParser: true})
+mongoose.connect("mongodb+srv://monty-python:SnYUEY4giV9rekw@functionup-backend-coho.0zpfv.mongodb.net/group_Helium_Database_db?retryWrites=true&w=majority", {useNewUrlParser: true})
     .then(() => console.log('mongodb running on 3000'))
     .catch(err => console.log(err))
 
