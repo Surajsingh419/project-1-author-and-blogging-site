@@ -112,6 +112,26 @@ const deleteBlogbyId = async function(req,res){
 
 }
 
+const deleteBlog = async function (req, res) {
+    try {
+        let authorId = req.query.authorId
+        let category = req.query.category
+        let subcategory = req.query.subcategory
+        let tags = req.query.tags
+        let unpublished = req.query.unpublished
+        let deletedblog = await blogModel.findOneAndUpdate({ authorId: authorId, category: category, subcategory: subcategory, tags: tags, unpublished: unpublished },
+        {isDeleted: true}, { new: true })
+        if (deletedblog) {
+            res.status(500).send({ msg: "data is deleted" });
+        } else {
+            res.status(500).send({ msg: "data is not deleted" });
+        }
+    }
+    catch (err) {
+        res.status(500).send({ msg: "Some error occured" });
+    }
+}
+
 
 
 
@@ -123,3 +143,4 @@ module.exports.getBlog = getBlog
 module.exports.getFilterBlog = getFilterBlog
 module.exports.updateBlog = updateBlog
 module.exports.deleteBlogbyId = deleteBlogbyId
+module.exports.deleteBlog = deleteBlog

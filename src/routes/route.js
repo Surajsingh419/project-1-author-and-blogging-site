@@ -12,5 +12,5 @@ router.get('/blogs',blogController.getBlog);
 // router.get('/blogs',blogController.getFilterBlog);
 router.put('/blogs/:blogId',blogController.updateBlog);
 router.delete('/blogs/:blogId',blogController.deleteBlogbyId);
-
+router.delete('/blogs/',blogController.deleteBlog)
 module.exports = router;
