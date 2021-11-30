@@ -39,39 +39,56 @@ const getBlog = async function (req, res) {
 }
 
 
+const getFilterBlog=async function(req,res)
+{
+  
+ try 
+ {
+  
+    let authorId = req.query.authorId
+    let tags = req.query.tags
+    let category = req.query.category
+    let subcategory = req.query.subcategory
 
-const getFilterBlog = async function (req, res) {
-    try {
-
-        // const category=req.query.category
-        // const tag=req.query.tag
-        // const subcategory=req.query.subcategory
-        // ,category:category,tag:tag,subcategory:subcategory
-        const blogData = await blogModel.find({ isDeleted: false, isPublished: true })
-        if (blogData) {
-            const authorId = req.query.authorid
-            const category = req.query.category
-            const tag = req.query.tag
-            const subcategory = req.query.subcategory
-
-            const blogData1 = await blogModel.find($or[{ authorId: authorId }, { tags: tag }][{ authorId: authorId }, { category: category }])
-            if (blogData1) {
-
-                res.status(200).send({ status: true, data: blogData1 })
-            }
-            else {
-                res.status(404).send({ status: false, msg: "No documents found!" })
-            }
-        }
-        else {
-            res.status(404).send({ status: false, msg: "The data is deleted or not published!" })
-        }
+    obj={}
+    if(authorId)
+    {
+        obj.authorId=authorId
+    }
+    if(tags)
+    {
+        obj.tags=tags
+    }
+    if(category)
+    {
+        obj.category=category
+    }
+    if(subcategory)
+    {
+        obj.subcategory=subcategory
+    }
+    console.log(obj)
+    obj.isDeleted=false
+    obj.isPublished=true
+    let data=await blogModel.find(obj)
+    if(!data)
+    {
+        return res.status(404).send({status:false,msg:"The given data is invalid!"})
+    }
+    else
+    {
+        res.status(201).send({status:true,data:data})
     }
 
-    catch (err) {
-        res.status(500).send({ msg: "Some error occured" });
-    }
-};
+}
+catch (err) 
+{
+
+    res.status(500).send({ msg: "Some error occured" });
+}
+    
+}
+
 
 const updateBlog = async function (req, res) {
     let blogid = req.params.blogId;
