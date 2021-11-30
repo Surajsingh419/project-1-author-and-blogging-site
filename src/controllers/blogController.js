@@ -25,26 +25,26 @@ const createBlog = async function (req, res)
 }
 
 
-const getBlog=async function(req,res)
-{
-try
-{
-    const blogData=await blogModel.find({isDeleted:false,isPublished:true})
-    if(blogData)
-    {
-        res.status(200).send({status: true,data: blogData})
-    }
-    else
-    {
-        res.status(404).send({status: false,msg:"No documents found!"})
-    }
-}
-catch(err)
-    {
+// const getBlog=async function(req,res)
+// {
+// try
+// {
+//     const blogData=await blogModel.find({isDeleted:false,isPublished:true})
+//     if(blogData)
+//     {
+//         res.status(200).send({status: true,data: blogData})
+//     }
+//     else
+//     {
+//         res.status(404).send({status: false,msg:"No documents found!"})
+//     }
+// }
+// catch(err)
+//     {
      
-      res.status(500).send({msg:"Some error occured"});
-    }
-}
+//       res.status(500).send({msg:"Some error occured"});
+//     }
+// }
 
 
 
@@ -52,7 +52,7 @@ const getFilterBlog=async function(req,res)
 {
 try
 {
-    const authorId=req.query.authorid
+   //const authorId=req.query.authorId
     // const category=req.query.category
     // const tag=req.query.tag
     // const subcategory=req.query.subcategory
@@ -60,7 +60,12 @@ try
    const blogData=await blogModel.find({isDeleted:false,isPublished:true})
    if(blogData)
    {
-    const blogData1=await blogModel.find({authorId:authorId})
+    const authorId=req.query.authorId
+    const category=req.query.category
+    const tag=req.query.tag
+    const subcategory=req.query.subcategory
+   
+    const blogData1=await blogModel.find({authorId:authorId}) 
     if(blogData1)
     {
         res.status(200).send({status: true,data: blogData1})
@@ -83,6 +88,6 @@ catch(err)
 }
 
 module.exports.createBlog= createBlog
-module.exports.getBlog=getBlog
+//module.exports.getBlog=getBlog
 module.exports.getFilterBlog=getFilterBlog
 
