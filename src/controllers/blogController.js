@@ -46,6 +46,25 @@ const getFilterBlog=async function(req,res)
         res.status(404).send({status: false,msg:"No documents found!"})
     }  
 }
+const putblog=async function(req,res)
+{
+   let blogId=req.params.blogid
+   let validBlog=await blogModel.findById(blogId)
+   let updatedTitle =req.body.title
+   let updatedBody = req.body.body
+   let updatedTag=req.body.tags
+   let updatedSubCategory=req.body.subcategory
+
+
+
+   if(validBlog){
+
+      let updateBlog=await blogModel.findOneAndUpdate({_id:blogId , isDeleted:false})
+   }
+   
+}
+
+
 
 module.exports.createBlog= createBlog
 module.exports.getBlog=getBlog
