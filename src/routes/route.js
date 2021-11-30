@@ -10,7 +10,7 @@ router.post('/authors', authorController.createAuthor);
 
 router.post('/blogs',blogController.createBlog);
 
-router.get('/blogs',blogController.getBlog);
+//router.get('/blogs',blogController.getBlog);
 router.get('/blogs',blogController.getFilterBlog);
-
+router.put('/blogs/:blogId',blogController.updateBlog);
 module.exports = router;

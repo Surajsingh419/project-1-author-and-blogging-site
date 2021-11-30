@@ -30,7 +30,7 @@ const blogSchema=new mongoose.Schema(
               require:true   
             },
 
-    "tags:":[String] ,
+    "tags":[String] ,
     "category": 
             {
                 type:String,
