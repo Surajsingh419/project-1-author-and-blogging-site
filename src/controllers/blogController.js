@@ -52,19 +52,28 @@ const getFilterBlog=async function(req,res)
 {
 try
 {
-    const authorId=req.query.authorId
-    const category=req.query.category
-    const tag=req.query.tag
-    const subcategory=req.query.subcategory
-    const blogData=await blogModel.find({authorId:authorId,category:category,tag:tag,subcategory:subcategory})
-    if(blogData)
+    const authorId=req.query.authorid
+    // const category=req.query.category
+    // const tag=req.query.tag
+    // const subcategory=req.query.subcategory
+   // ,category:category,tag:tag,subcategory:subcategory
+   const blogData=await blogModel.find({isDeleted:false,isPublished:true})
+   if(blogData)
+   {
+    const blogData1=await blogModel.find({authorId:authorId})
+    if(blogData1)
     {
-        res.status(200).send({status: true,data: blogData})
+        res.status(200).send({status: true,data: blogData1})
     }
     else
     {
         res.status(404).send({status: false,msg:"No documents found!"})
     }
+   }
+   else
+   {
+        res.status(404).send({status: false,msg:"The data is deleted or not published!"})
+   }
 }  
     
 catch(err)
