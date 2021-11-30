@@ -25,7 +25,7 @@ const createBlog = async function (req, res) {
             res.status(400).send({ status: false, msg: 'Invalid Request' })
         }
     }
-
+}
 
     const getBlog = async function (req, res) {
         try {
