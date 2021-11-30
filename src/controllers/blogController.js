@@ -2,39 +2,56 @@ const mongoose = require('mongoose')
 const authorModel = require("../models/authorModel")
 const blogModel = require("../models/blogModel")
 
-const createBlog = async function (req, res) {
+const createBlog = async function (req, res) 
+{
+    try
+    {
     const blogData = req.body;
-    if (validId) {
+    if (validId) 
+    {
 
-        if (blogData.isPublished == true) {
+        if (blogData.isPublished == true) 
+        {
             blogData["publishedAt"] = new Date()
         }
         const Id = req.body.authorId
         const validId = await authorModel.findById(Id)
-        if (validId) {
+        if (validId) 
+        {
 
             const newBlog = await blogModel.create(blogData)
             res.status(201).send({ status: true, msg: 'New blog created successfully', data: newBlog })
         }
-        else {
+        else 
+        {
             res.status(400).send({ status: false, msg: 'Invalid Request' })
         }
     }
+   }
+   catch (error) 
+   {
+       res.status(500).send({ message: "Failed", error: error.message });
+   }
+
 }
 
-const getBlog = async function (req, res) {
-    try {
+const getBlog = async function (req, res) 
+{
+    try 
+    {
         const blogData = await blogModel.find({ isDeleted: false, isPublished: true })
-        if (blogData) {
+        if (blogData) 
+        {
             res.status(200).send({ status: true, data: blogData })
         }
-        else {
+        else 
+        {
             res.status(404).send({ status: false, msg: "No documents found!" })
         }
     }
-    catch (err) {
-
-        res.status(500).send({ msg: "Some error occured" });
+    catch (error) 
+    {
+        res.status(500).send({ message: "Failed", error: error.message });
     }
 }
 
@@ -67,7 +84,7 @@ const getFilterBlog=async function(req,res)
     {
         obj.subcategory=subcategory
     }
-    console.log(obj)
+    //console.log(obj)
     obj.isDeleted=false
     obj.isPublished=true
     let data=await blogModel.find(obj)
@@ -81,16 +98,16 @@ const getFilterBlog=async function(req,res)
     }
 
 }
-catch (err) 
+catch (error) 
 {
-
-    res.status(500).send({ msg: "Some error occured" });
+    res.status(500).send({ message: "Failed", error: error.message });
 }
     
 }
 
 
-const updateBlog = async function (req, res) {
+const updateBlog = async function (req, res) 
+{
     let blogid = req.params.blogId;
     let updatedBlogdata = req.body
     let updatedTitle = req.body.title;
@@ -98,12 +115,16 @@ const updateBlog = async function (req, res) {
     let addTags = req.body.tags;
     let addSubcategory = req.body.subcategory;
     let newispublished = req.body.isPublished;
-    let newisdeleted = req.body.isDeleted
+   // let newisdeleted = req.body.isDeleted
 
     let validBlog = await blogModel.findById(blogid)
-    if (validBlog) {
+    try
+    {
+    if (validBlog) 
+    {
 
-        if (newispublished == true) {
+        if (newispublished == true) 
+        {
             updatedBlogdata.publishedAt = new Date()
             abx = updatedBlogdata.publishedAt
         }
@@ -112,25 +133,40 @@ const updateBlog = async function (req, res) {
             { new: true })
 
         res.status(200).send({ status: true, data: newBlog })
-    } else {
+    } 
+    else 
+    {
         res.status(500).send({ msg: "Some error occured" });
     }
+   }
+   catch (error) 
+  {
+    res.status(500).send({ message: "Failed", error: error.message });
+  }
 }
 
 const deleteBlogbyId = async function(req,res){
-
+   try
+   {
     let blogId = req.params.blogId
     let deletedBlog = await blogModel.findOneAndUpdate({_id:blogId, isDeleted:false},{isDeleted:true} )
-    if(deletedBlog){
+    if(deletedBlog)
+    {
         res.status(200).send({msg : "Deleted" })
-    } else {
+    } else 
+    {
         res.status(200).send({msg : "Invalid Blog ID"})
     }
-
+   }
+   catch (error) 
+   {
+     res.status(500).send({ message: "Failed", error: error.message });
+   }
 }
 
 const deleteBlog = async function (req, res) {
-    try {
+    try 
+    {
         let authorId = req.query.authorId
         let category = req.query.category
         let subcategory = req.query.subcategory
@@ -138,14 +174,17 @@ const deleteBlog = async function (req, res) {
         let unpublished = req.query.unpublished
         let deletedblog = await blogModel.findOneAndUpdate({ authorId: authorId, category: category, subcategory: subcategory, tags: tags, unpublished: unpublished },
         {isDeleted: true}, { new: true })
-        if (deletedblog) {
+        if (deletedblog) 
+        {
             res.status(500).send({ msg: "data is deleted" });
-        } else {
+        } else 
+        {
             res.status(500).send({ msg: "data is not deleted" });
         }
     }
-    catch (err) {
-        res.status(500).send({ msg: "Some error occured" });
+    catch (error) 
+    {
+      res.status(500).send({ message: "Failed", error: error.message });
     }
 }
 
