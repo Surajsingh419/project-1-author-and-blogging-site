@@ -2,15 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 
-const authorController= require("../controllers/authorController")
-const blogController= require("../controllers/blogController")
-
+const authorController = require("../controllers/authorController")
+const blogController = require("../controllers/blogController")
+const middleWare = require("../middleware/authentication")
+const Token = middleWare.tokenCheck
 
 router.post('/authors', authorController.createAuthor);
-router.post('/blogs',blogController.createBlog);
-router.get('/blogs',blogController.getBlog);
- router.get('/Filterblogs',blogController.getFilterBlog);
-router.put('/blogs/:blogId',blogController.updateBlog);
-router.delete('/blogs/:blogId',blogController.deleteBlogbyId);
-router.delete('/blogs/',blogController.deleteBlog)
+
+router.post('/blogs', Token, blogController.createBlog);
+
+router.get('/blogs', Token, blogController.getFilterBlog);
+
+router.put('/blogs/:blogId', Token, blogController.updateBlog);
+
+router.delete('/blogs/:blogId', Token, blogController.deleteBlogbyId);
+
+router.delete('/blogs', Token, blogController.deleteBlog)
+
+router.post('/login', blogController.loginAuthor)
+
 module.exports = router;

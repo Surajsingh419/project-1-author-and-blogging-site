@@ -14,7 +14,7 @@ const mongoose = require('mongoose')
 
 
 
-mongoose.connect("mongodb+srv://monty-python:SnYUEY4giV9rekw@functionup-backend-coho.0zpfv.mongodb.net/group_Helium_Database_db?retryWrites=true&w=majority", {useNewUrlParser: true})
+mongoose.connect("mongodb+srv://monty-python:SnYUEY4giV9rekw@functionup-backend-coho.0zpfv.mongodb.net/group_Helium_Database_db?retryWrites=true&w=majority", { useNewUrlParser: true })
     .then(() => console.log('mongodb running on 3000'))
     .catch(err => console.log(err))
 
@@ -22,6 +22,6 @@ mongoose.connect("mongodb+srv://monty-python:SnYUEY4giV9rekw@functionup-backend-
 app.use('/', route);
 
 
-app.listen(process.env.PORT || 3000, function() {
-	console.log('Express app running on port ' + (process.env.PORT || 3000))
+app.listen(process.env.PORT || 3000, function () {
+    console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
