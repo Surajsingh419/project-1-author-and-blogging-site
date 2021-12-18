@@ -18,7 +18,8 @@ let tokenCheck = function (req, res, next) {
     }
   }
   catch (error) {
-    res.status(500).send({ message: "Failed", error: error.message });
+    res.status(500).send({ status: false, message: 'error message' });
+  
   }
 }
 

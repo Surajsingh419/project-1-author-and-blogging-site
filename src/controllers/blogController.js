@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const authorModel = require("../models/authorModel")
 const blogModel = require("../models/blogModel")
-
+const jwt = require('jsonwebtoken');
 //------------------------1.Create Blog---------------------------------------------------------
 const createBlog = async function (req, res) {
     try {
@@ -98,7 +98,7 @@ const updateBlog = async function (req, res) {
     try {
 
         let validBlog = await blogModel.findById(blogid)
-
+        let abx;
 
         if (validBlog) {
             if (req.validToken1.authorId == validBlog.authorId) {
